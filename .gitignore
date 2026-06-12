@@ -1,0 +1,46 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+*.egg
+.eggs/
+build/
+dist/
+.Python
+pip-wheel-metadata/
+
+# Virtual envs
+.venv/
+venv/
+env/
+
+# Test / coverage
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Tooling
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Local secrets / env
+.env
+*.local.env
+# Raw Kubernetes Secret rendered from secret.example.yaml (keep the example, ignore the real one)
+deploy/kubernetes/secret.yaml
+secret*.local.yaml
+
+# Build artifacts
+*.tgz
+*.log
+
+# Intermediate icon raster produced by the diagram generator (PNGs are committed)
+assets/diagrams/_harf_icon.png
