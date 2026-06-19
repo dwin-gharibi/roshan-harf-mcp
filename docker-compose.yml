@@ -1,0 +1,12 @@
+services:
+  roshan-harf-mcp:
+    build: .
+    image: roshan-harf-mcp:latest
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+    environment:
+      ROSHAN_HARF__DEFAULT_INSTANCE: ${ROSHAN_HARF__DEFAULT_INSTANCE:-default}
+      ROSHAN_HARF__LOG_LEVEL: ${ROSHAN_HARF__LOG_LEVEL:-INFO}
+    restart: unless-stopped
