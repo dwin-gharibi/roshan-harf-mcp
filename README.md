@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/icons/harf.svg" height="64" alt="Harf icon"/>
+<img src="assets/icons/harf.svg" height="200" alt="Harf icon"/>
 
 # roshan-harf-mcp
 
@@ -231,6 +231,6 @@ to their respective owner and are used only to identify the upstream service.
 
 <div align="center">
 
-<img src="assets/icons/roshan.svg" alt="roshan-logo" width="60%"/>
+<img src="assets/icons/roshan.svg" alt="roshan-logo" width="40%"/>
 
 </div>
