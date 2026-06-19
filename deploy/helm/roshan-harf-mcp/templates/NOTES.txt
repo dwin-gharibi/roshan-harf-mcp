@@ -1,0 +1,25 @@
+roshan-harf-mcp {{ .Chart.AppVersion }} has been deployed.
+
+Release:   {{ .Release.Name }}
+Namespace: {{ .Release.Namespace }}
+Replicas:  {{ if .Values.autoscaling.enabled }}autoscaled {{ .Values.autoscaling.minReplicas }}-{{ .Values.autoscaling.maxReplicas }}{{ else }}{{ .Values.replicaCount }}{{ end }}
+
+Configured Harf instances:
+{{- range $name, $inst := .Values.instances }}
+  - {{ $name }}: {{ $inst.base_url }}
+{{- end }}
+
+Reach the server (streamable-http on port {{ .Values.service.port }}):
+
+{{- if .Values.ingress.enabled }}
+  Ingress:
+  {{- range .Values.ingress.hosts }}
+    http{{ if $.Values.ingress.tls }}s{{ end }}://{{ .host }}
+  {{- end }}
+{{- else if eq .Values.service.type "ClusterIP" }}
+  kubectl --namespace {{ .Release.Namespace }} port-forward svc/{{ include "roshan-harf-mcp.fullname" . }} {{ .Values.service.port }}:{{ .Values.service.port }}
+  # then connect an MCP client to http://127.0.0.1:{{ .Values.service.port }}
+{{- end }}
+
+Remember: Harf tokens live in the Secret
+"{{ include "roshan-harf-mcp.secretName" . }}". 'list_instances' never returns secrets.

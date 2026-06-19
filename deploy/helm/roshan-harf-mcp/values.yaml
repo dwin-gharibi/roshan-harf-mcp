@@ -1,0 +1,76 @@
+image:
+  repository: roshan-harf-mcp
+  tag: "0.2.0"
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+replicaCount: 1
+
+args:
+  - "--transport"
+  - "streamable-http"
+  - "--host"
+  - "0.0.0.0"
+  - "--port"
+  - "8000"
+
+defaultInstance: default
+logLevel: INFO
+
+instances:
+  default:
+    base_url: https://harf.roshan-ai.ir
+    username: ""
+    password: ""
+    token: ""
+    verify_ssl: true
+
+existingSecret: ""
+
+service:
+  type: ClusterIP
+  port: 8000
+
+ingress:
+  enabled: false
+  className: ""
+  annotations: {}
+  hosts:
+    - host: roshan-harf-mcp.local
+      paths:
+        - path: /
+          pathType: Prefix
+  tls: []
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: "1"
+    memory: 512Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 5
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: null
+
+podAnnotations: {}
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 10001
+securityContext:
+  allowPrivilegeEscalation: false
+  readOnlyRootFilesystem: true
+  capabilities:
+    drop:
+      - ALL
+
+nodeSelector: {}
+tolerations: []
+affinity: {}

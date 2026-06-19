@@ -1,0 +1,18 @@
+apiVersion: v2
+name: roshan-harf-mcp
+description: MCP server for Roshan AI's Harf (حرف) Persian speech service (transcription, alignment, live streaming, speaker tasks).
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+home: https://www.roshan-ai.ir
+sources:
+  - https://docs.roshan-ai.ir
+keywords:
+  - mcp
+  - roshan
+  - harf
+  - speech
+  - asr
+  - persian
+maintainers:
+  - name: Roshan AI MCP Contributors
