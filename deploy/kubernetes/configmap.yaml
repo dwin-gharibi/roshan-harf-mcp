@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: roshan-harf-mcp
+  namespace: roshan-harf-mcp
+  labels:
+    app.kubernetes.io/name: roshan-harf-mcp
+data:
+  ROSHAN_HARF__DEFAULT_INSTANCE: "default"
+  ROSHAN_HARF__LOG_LEVEL: "INFO"
+  ROSHAN_HARF__INSTANCES__DEFAULT__BASE_URL: "https://harf.roshan-ai.ir"
+  ROSHAN_HARF__INSTANCES__DEFAULT__VERIFY_SSL: "true"
