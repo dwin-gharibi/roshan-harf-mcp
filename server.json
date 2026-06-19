@@ -1,0 +1,78 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schema/server.json",
+  "name": "roshan-harf-mcp",
+  "description": "Self-hostable MCP server for Roshan AI's Harf (حرف) Persian speech service: transcription (ASR), forced alignment, real-time streaming, and speaker verification/identification/diarization/indexing. Supports many named, self-hosted Harf instances.",
+  "version": "0.1.0",
+  "homepage": "https://www.roshan-ai.ir",
+  "documentation": "https://docs.roshan-ai.ir",
+  "license": "MIT",
+  "runtime": {
+    "type": "python",
+    "python": ">=3.11",
+    "entrypoint": "python -m roshan_harf_mcp"
+  },
+  "transports": ["stdio", "sse", "streamable-http"],
+  "environment_variables": [
+    {
+      "name": "ROSHAN_HARF__DEFAULT_INSTANCE",
+      "description": "Name of the Harf instance used when a tool call omits 'instance'.",
+      "required": false,
+      "default": "default"
+    },
+    {
+      "name": "ROSHAN_HARF__LOG_LEVEL",
+      "description": "Logging level (DEBUG/INFO/WARNING/ERROR).",
+      "required": false,
+      "default": "INFO"
+    },
+    {
+      "name": "ROSHAN_HARF__INSTANCES__<NAME>__BASE_URL",
+      "description": "Base URL for Harf instance <NAME> (default https://harf.roshan-ai.ir).",
+      "required": false
+    },
+    {
+      "name": "ROSHAN_HARF__INSTANCES__<NAME>__TOKEN",
+      "description": "API token for Harf instance <NAME> (sent as 'Authorization: Token <token>').",
+      "required": false,
+      "secret": true
+    },
+    {
+      "name": "ROSHAN_HARF__INSTANCES__<NAME>__VERIFY_SSL",
+      "description": "Whether to verify TLS certificates for instance <NAME> (default true).",
+      "required": false,
+      "default": "true"
+    },
+    {
+      "name": "ROSHAN_HARF__INSTANCES__<NAME>__TIMEOUT",
+      "description": "Per-request timeout in seconds for instance <NAME> (default 60).",
+      "required": false,
+      "default": "60"
+    },
+    {
+      "name": "ROSHAN_HARF_BASE_URL",
+      "description": "Shorthand: base URL for the synthesized 'default' instance.",
+      "required": false
+    },
+    {
+      "name": "ROSHAN_HARF_TOKEN",
+      "description": "Shorthand: API token for the synthesized 'default' instance.",
+      "required": false,
+      "secret": true
+    }
+  ],
+  "tools": [
+    { "name": "harf_transcribe", "description": "Transcribe Persian audio/video by URL (sync, or async returning task_ids)." },
+    { "name": "harf_transcribe_upload", "description": "Transcribe a local audio/video file via multipart upload." },
+    { "name": "harf_transcription_status", "description": "Poll the state of async transcription tasks (PENDING/FAILURE/TIMEOUT)." },
+    { "name": "harf_align", "description": "Force-align a known transcript to its audio for per-segment timestamps." },
+    { "name": "harf_live_transcribe", "description": "Stream a local WAV file over a WebSocket for real-time transcription." },
+    { "name": "harf_live_info", "description": "Describe the Harf live (WebSocket) streaming protocol." },
+    { "name": "harf_speaker_verification", "description": "Verify whether a speaker matches reference audio (threshold 0.65)." },
+    { "name": "harf_speaker_identification", "description": "Identify which known speaker a probe most resembles." },
+    { "name": "harf_speaker_diarization", "description": "Segment audio by speaker ('who spoke when') with text per segment." },
+    { "name": "harf_speaker_indexing", "description": "Label timestamped, transcribed segments with known speakers." },
+    { "name": "healthcheck", "description": "Check that a Harf instance is up and ready." },
+    { "name": "list_instances", "description": "List configured Harf instances (names + base URLs only)." },
+    { "name": "roshan_harf_docs", "description": "Built-in offline catalog/documentation for Harf and these tools." }
+  ]
+}

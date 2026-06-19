@@ -1,0 +1,59 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "roshan-harf-mcp"
+version = "0.1.0"
+description = "Self-hostable MCP server for Roshan AI's Harf (حرف) Persian speech service."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Dwin Gharibi" }]
+keywords = ["mcp", "roshan", "harf", "speech", "asr", "persian", "farsi"]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "mcp>=1.2",
+    "httpx>=0.27",
+    "pydantic>=2",
+    "pydantic-settings>=2",
+    "websockets>=12",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest",
+    "pytest-asyncio",
+    "respx",
+    "ruff",
+]
+
+[project.scripts]
+roshan-harf-mcp = "roshan_harf_mcp.__main__:main"
+
+[project.urls]
+Homepage = "https://www.roshan-ai.ir"
+Documentation = "https://docs.roshan-ai.ir"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/roshan_harf_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "PL"]
+ignore = ["PLR2004", "PLR0913"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["PLC0415"]
